@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="Actual idiots — The leading frontier in human-like ai responses.">
-  <title>Actual idiots — Public conversations</title>
+  <title>Actual idiots — Human-like artificial intelligence</title>
   <link rel="stylesheet" href="./styles.css">
   <script type="module" src="./app.js"></script>
 </head>
@@ -35,18 +35,18 @@
           <textarea id="home-question" rows="2" maxlength="5000" placeholder="Ask anything" aria-label="Ask a public question"></textarea>
           <div class="composer-bottom"><span class="composer-hint">Your question will be public</span><button class="send-button" id="home-send" type="submit" aria-label="Continue to new conversation">↑</button></div>
         </form>
-        <div class="home-footer">Human answers, not artificial ones. <span>Everyone can ask. Only admins can reply.</span></div>
+        <div class="home-footer">The most human-like AI ever!. <span>Everyone can ask. Only our super-smart AI can reply.</span></div>
         <div class="recent-section"><div class="recent-heading"><h2>Recent conversations</h2><span>Visible to everyone</span></div><div id="featured-grid" class="featured-grid"><p class="loading-message">Loading…</p></div></div>
       </div>
       <div class="conversation-view hidden" id="conversation-view">
         <div class="conversation-top"><div><h1 id="conversation-title"></h1><p id="conversation-date"></p></div><span id="conversation-status" class="status">Awaiting reply</span></div>
         <div class="thread" id="thread"></div>
         <div class="thread-bottom">
-          <form class="reply-form hidden" id="reply-form"><label for="reply-text" class="sr-only">Admin reply</label><div class="reply-composer"><textarea id="reply-text" maxlength="5000" rows="2" placeholder="Reply as admin…" required></textarea><div class="composer-bottom"><span class="composer-hint">Your reply will be public</span><button class="send-button" id="reply-submit" type="submit" aria-label="Send admin reply">↑</button></div></div></form>
-          <div class="read-only" id="read-only"><span aria-hidden="true">🔒</span> Only administrators can reply to conversations.</div>
+          <form class="reply-form hidden" id="reply-form"><label for="reply-text" class="sr-only">AI reply</label><div class="reply-composer"><textarea id="reply-text" maxlength="5000" rows="2" placeholder="Reply as admin…" required></textarea><div class="composer-bottom"><span class="composer-hint">Your reply will be public</span><button class="send-button" id="reply-submit" type="submit" aria-label="Send admin reply">↑</button></div></div></form>
+          <div class="read-only" id="read-only"><span aria-hidden="true">🔒</span> Only the AI can reply to conversations.</div>
         </div>
       </div>
-      <div class="create-view hidden" id="create-view"><div class="create-inner"><div class="eyebrow">NEW CONVERSATION</div><h1>Ask a question</h1><p class="create-intro">Start a public conversation. An administrator can reply, and everyone can read the answer.</p><form id="create-form" class="create-form"><label for="question-title">Title</label><input id="question-title" placeholder="Give your question a short title" maxlength="120" minlength="5" required><div class="field-hint">5–120 characters</div><label for="question-body">Your message</label><textarea id="question-body" placeholder="Type your question here…" maxlength="5000" minlength="10" rows="7" required></textarea><div class="field-hint">10–5,000 characters</div><div class="notice">◎ Your question is public. Don't include private or sensitive information.</div><div class="form-actions"><button type="button" class="cancel-button" id="back-from-create">Cancel</button><button class="primary-button" id="create-submit" type="submit">Publish question <span>↗</span></button></div></form></div></div>
+      <div class="create-view hidden" id="create-view"><div class="create-inner"><div class="eyebrow">NEW CONVERSATION</div><h1>Ask a question</h1><p class="create-intro">Start a public conversation. An AI can reply, and everyone can read the answer.</p><form id="create-form" class="create-form"><label for="question-title">Title</label><input id="question-title" placeholder="Give your question a short title" maxlength="120" minlength="5" required><div class="field-hint">5–120 characters</div><label for="question-body">Your message</label><textarea id="question-body" placeholder="Type your question here…" maxlength="5000" minlength="10" rows="7" required></textarea><div class="field-hint">10–5,000 characters</div><div class="notice">◎ Your question is public. Don't include private or sensitive information.</div><div class="form-actions"><button type="button" class="cancel-button" id="back-from-create">Cancel</button><button class="primary-button" id="create-submit" type="submit">Publish question <span>↗</span></button></div></form></div></div>
     </section>
     <footer class="footer">Actual idiots · Public conversations</footer>
   </main>
