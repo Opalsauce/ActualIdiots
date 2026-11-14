@@ -76,7 +76,7 @@ function appendMessage(container, label, text, timestamp, admin=false) {
   const time=document.createElement('div'); time.className='message-time'; time.textContent=humanTime(timestamp);
   content.append(name,body,time); wrap.append(avatar,content); container.append(wrap);
 }
-function renderThread() { const c=state.conversations.find(x=>x.id===state.selectedId); if (!c) return; const thread=$('thread'); thread.replaceChildren(); appendMessage(thread,'Community member',c.initialMessage,c.createdAt); for (const r of state.replies) appendMessage(thread,'Administrator',r.text,r.createdAt,true); }
+function renderThread() { const c=state.conversations.find(x=>x.id===state.selectedId); if (!c) return; const thread=$('thread'); thread.replaceChildren(); appendMessage(thread,'Community member',c.initialMessage,c.createdAt); for (const r of state.replies) appendMessage(thread,'AI',r.text,r.createdAt,true); }
 async function ensureAnonymous() { if (auth.currentUser) return auth.currentUser; const {user}=await signInAnonymously(auth); return user; }
 async function checkAdmin(user) { if (!user || user.isAnonymous) return false; const snap=await getDoc(doc(db,'admins',user.uid)); return snap.exists() && snap.data().enabled === true; }
 function listenConversations() {
