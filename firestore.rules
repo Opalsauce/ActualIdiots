@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function admin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+        && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.enabled == true;
+    }
+    match /admins/{uid} {
+      // Only a signed-in user may check their own administrator status.
+      // Admins must be created MANUALLY from the Firebase Console.
+      allow get: if signedIn() && request.auth.uid == uid;
+      allow list, create, update, delete: if false;
+    }
+    match /conversations/{conversationId} {
+      allow read: if true;
+      // Every visitor can create exactly one initial message in a new question.
+      // They cannot modify it or send subsequent messages.
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['title','initialMessage','createdBy','status','createdAt','updatedAt'])
+        && request.resource.data.keys().hasAll(['title','initialMessage','createdBy','status','createdAt','updatedAt'])
+        && request.resource.data.createdBy == request.auth.uid
+        && request.resource.data.title is string
+        && request.resource.data.title.size() >= 5
+        && request.resource.data.title.size() <= 120
+        && request.resource.data.initialMessage is string
+        && request.resource.data.initialMessage.size() >= 10
+        && request.resource.data.initialMessage.size() <= 5000
+        && request.resource.data.status == 'open'
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      // Only admin may mark a question as answered/open.
+      allow update: if admin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','updatedAt'])
+        && request.resource.data.status in ['open','answered']
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if admin();
+      match /replies/{replyId} {
+        allow read: if true;
+        allow create: if admin()
+          && request.resource.data.keys().hasOnly(['text','senderUid','createdAt'])
+          && request.resource.data.keys().hasAll(['text','senderUid','createdAt'])
+          && request.resource.data.senderUid == request.auth.uid
+          && request.resource.data.text is string
+          && request.resource.data.text.size() > 0
+          && request.resource.data.text.size() <= 5000
+          && request.resource.data.createdAt == request.time;
+        allow update, delete: if admin();
+      }
+    }
+  }
+}
